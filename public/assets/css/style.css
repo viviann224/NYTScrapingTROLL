@@ -1,6 +1,127 @@
-body {
-    background-image: url("/assets/images/background.jpg");
-    padding-top: 70px;
+/*cool hover effects*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  font-family:'Open Sans', sans-serif;
+
+  width:100%;
+  margin:0 auto;
+  padding:0em 0 0em;
+
+    background-color: #252934;
+   
+    color:black;
+
+}
+h1:after{
+	color:white;
+  content: ".";
+
+}
+h1{
+  font-size:2em;
+  color:#fefefe;
+  /*text-transform:lowercase;*/
+  text-shadow: 2px 2px 0px #484849;
+}
+
+
+.wrapper
+{
+  margin:3em 0;
+}
+a,a:visited,a:hover,a:active
+{
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+	position:relative;
+  transition:0.5s color ease;
+	text-decoration:none;
+	color:#949494;
+	font-size:1em;
+}
+a:hover{
+	color:#d73444;
+}
+a.before:before,a.after:after{
+  content: "";
+  transition:0.5s all ease;
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+  position:absolute;
+}
+a.before:before{
+  top:-0.25em;
+}
+a.after:after{
+  bottom:-0.25em;
+}
+a.before:before,a.after:after{
+  height:5px;
+  height:0.35rem;
+  width:0;
+  background:#d73444;
+}
+a.first:after{
+  left:0;
+}
+a.second:after{
+  right:0;
+}
+a.third:after,a.sixth:before,a.sixth:after{
+  left:50%;
+  -webkit-transform:translateX(-50%);
+          transform:translateX(-50%);
+}
+a.fourth:before,a.fourth:after{
+  left:0;
+}
+a.fifth:before,a.fifth:after{
+  right:0;
+}
+a.seventh:before{
+  right:0;
+}
+a.seventh:after{
+  left:0;
+}
+a.eigth:before{
+  left:0;
+}
+a.eigth:after{
+  right:0;
+}
+a.before:hover:before,a.after:hover:after{
+  width:100%;
+}
+
+
+
+.container
+{
+	 margin: auto;
+}
+
+.jumbotron
+{
+	/*margin:10px;*/
+	color:#e1236e;
+	background-color: #252934;
+	position: relative;
+	margin-top: 45px;
+	margin-bottom: -5px;
+	padding:0px;
+}
+
+#logo
+{
+	margin:0px;
+
+}
+
+#header
+{
+	
 }
 
 .deleteNote {
@@ -14,4 +135,97 @@ body {
 
 #scrape {
     margin: 8px 0px;
+}
+
+/* sticky footer Style the header */
+.header 
+{
+  padding: 10px 10px;
+  background: #1c252f;
+  color: #f1f1f1;
+  z-index:10;
+  width:100%;
+  
+  border-bottom: 2px;
+  border-bottom-color: #ffffff;
+}
+.panel-default > .panel-heading 
+{
+background: white; 
+color: #1c252f; 
+border-bottom-color: white;
+font-family: 'Raleway', sans-serif;
+font-size:30px;
+text-transform:uppercase;
+letter-spacing: -1px;
+line-height: 1.6;
+
+}
+#logo
+{
+	font-size:35px;
+	float:left;
+	color:white;
+}
+#submenu
+{
+	float:right;
+
+}
+#myHeader
+{
+	height:70px;
+	border-bottom: 2px solid #4166c3;
+}
+
+button
+{
+	background-color: #3c62c2;
+	border-color: black;
+	border: 2px solid black;
+    border-radius: 5px;
+    color:white;
+}
+
+button: hover
+{
+	background-color:white !important;
+}
+
+button:active 
+{
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</
+
+ .panel-body,.panel 
+{
+	color: #000000; 
+	background-color: white;
+
+	
+}
+/* Page content */
+.content {
+	margin-top:40px;
+  padding: 10px;
+  width:100%;
+
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky 
+{
+  position: fixed;
+  top: 0px;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content 
+{
+  padding-top: 102px;
+  width:100%;
 }

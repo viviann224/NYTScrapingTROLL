@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <!--jQuery Link-->
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <!--google font -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:700" rel="stylesheet">
         <!--Bootstrap Links-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -16,7 +18,31 @@
         <title>Mongo Article Scraper!</title>
     </head>
     <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <div class="header" id="myHeader">
+  <a href="/" class="third after" id="logo">Mongo Scraper</a> 
+            <div id="submenu">
+                 <a href="/" class="third after">Home</a> |
+                    <a href="/saved" class="third after">Saved Articles</a> |
+                    <button id="scrape">Scrape Articles</button>
+              </div>
+</div>
+<div class="container">
+        <!--
+    <div class="header" id="myHeader">
+        <div class="navbar-header">
+                <a class="navbar-brand" href="/">Mongo Scraper</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/saved">Saved Articles</a></li>
+                    <li><button type="button" class="btn btn-primary" id="scrape">Scrape Articles</button></li>
+                </ul>
+            </div>
+    </div> -->
+        <!--
+    <nav class="navbar navbar-default navbar-fixed-top" id="header">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Mongo Scraper</a>
@@ -29,10 +55,11 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
     {{{ body }}}
 
         <!--External JS Link-->
         <script src="/assets/js/app.js"></script>
+      </div> 
     </body>
 </html>

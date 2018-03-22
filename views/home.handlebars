@@ -2,7 +2,7 @@
 <div class="container">
     <div class="col-md-12 jumbotron">
         <div class="text-center">
-            <h1> New York Times Mongo Scraper</h1>
+            <h1>Scraping TROLL</h1>
         </div>
 
     </div>
@@ -15,9 +15,9 @@
                 </div>
                 <div class="panel-body">
                     <p> {{this.summary}}</p>
-                    <a href={{this.link}} target="_blank">{{this.link}}</a>
+                    <a href={{this.link}} target="_blank" class="third after">{{this.link}}</a>
                     <br><br>
-                    <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
+                    <button type="button" class=" save" data-id={{this._id}}>Save Article</button>
                 </div>
             </div>
             {{/each}}
