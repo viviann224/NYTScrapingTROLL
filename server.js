@@ -5,13 +5,11 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var path = require("path");
 
-
-
 // Requiring Note and Article models
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
-// Require request and cheerio for scraping
+// Scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
 
@@ -19,7 +17,7 @@ var cheerio = require("cheerio");
 mongoose.Promise = Promise;
 
 //Define port
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3000
 
 // Initialize Express
 var app = express();
@@ -29,8 +27,6 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-
-
 
 // Make public a static dir
 app.use(express.static("public"));
@@ -44,18 +40,9 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-
-
-// Set mongoose to leverage built in JavaScript ES6 Promises
-// Connect to the Mongo DB
-//mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/scraper", 
-  //depreciated remove 
-/*{
-  useMongoClient: true
-}*/);
-
-//mongoose connection
+// Database configuration with mongoose
+//mongoose.connect("mongodb://heroku_jmv816f9:5j1nd4taq42hi29bfm5hobeujd@ds133192.mlab.com:33192/heroku_jmv816f9");
+mongoose.connect("mongodb://localhost/scraper");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -68,80 +55,202 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-// Main route (simple Hello World Message)
+// Routes
+// ======
+
+//GET requests to render Handlebars pages
 app.get("/", function(req, res) {
-  res.send("Hello world");
-  //drop database
-  db.scrapedData.drop();
+  Article.find({"saved": false}, function(error, data) {
+    var hbsObject = {
+      article: data
+    };
+    console.log(hbsObject);
+    res.render("home", hbsObject);
+  });
 });
 
-// Retrieve data from the db
-app.get("/all", function(req, res) {
-  // Find all results from the scrapedData collection in the db
-  Article.find({}, function(error, found) {
-    // Throw any errors to the console
+app.get("/saved", function(req, res) {
+  Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
+    var hbsObject = {
+      article: articles
+    };
+    res.render("saved", hbsObject);
+  });
+});
+
+// A GET request to scrape the echojs website
+app.get("/scrape", function(req, res) {
+  // First, we grab the body of the html with request
+  request("https://www.nytimes.com/", function(error, response, html) {
+    // Then, we load that into cheerio and save it to $ for a shorthand selector
+    var $ = cheerio.load(html);
+    // Now, we grab every h2 within an article tag, and do the following:
+    $("article").each(function(i, element) {
+
+      // Save an empty result object
+      var result = {};
+
+      // Add the title and summary of every link, and save them as properties of the result object
+      result.title = $(this).children("h2").text();
+      result.summary = $(this).children(".summary").text();
+      result.link = $(this).children("h2").children("a").attr("href");
+
+      // Using our Article model, create a new entry
+      // This effectively passes the result object to the entry (and the title and link)
+      var entry = new Article(result);
+
+      // Now, save that entry to the db
+      entry.save(function(err, doc) {
+        // Log any errors
+        if (err) {
+          console.log(err);
+        }
+        // Or log the doc
+        else {
+          console.log(doc);
+        }
+      });
+
+    });
+        res.send("Scrape Complete");
+
+  });
+  // Tell the browser that we finished scraping the text
+});
+
+// This will get the articles we scraped from the mongoDB
+app.get("/articles", function(req, res) {
+  // Grab every doc in the Articles array
+  Article.find({}, function(error, doc) {
+    // Log any errors
     if (error) {
       console.log(error);
     }
-    // If there are no errors, send the data to the browser as json
+    // Or send the doc to the browser as a json object
     else {
-      res.json(found);
+      res.json(doc);
     }
   });
 });
 
-// Scrape data from one site and place it into the mongodb db
-app.get("/scrape", function(req, res) 
-{
-  // Make a request for the news section of ycombinator
-    //http://austinfoodmagazine.com/category/dining/
-  request("http://austinfoodmagazine.com/category/dining/", function(error, response, html) 
-  {
-    // Load the html body from request into cheerio
-    var $ = cheerio.load(html);
-    //scraping directions
-    //https://data-lessons.github.io/library-webscraping/02-csssel/
-    // For each element with a "title" class
-    $(".cb-post-title").each(function(i, element) {
-    //$(".category-dining").each(function(i, element) {
-     // var main=$("cb-post-title");
-      // Save the text and href of each link enclosed in the current element
-      var title = $(element).children("a").text();
-      var link = $(element).children("a").attr("href");
-      var summary =$(element).children().children(".cb-excerpt");
-      console.log(summary);
+// Grab an article by it's ObjectId
+app.get("/articles/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  Article.findOne({ "_id": req.params.id })
+  // ..and populate all of the notes associated with it
+  .populate("note")
+  // now, execute our query
+  .exec(function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Otherwise, send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
+});
 
-      // If this found element had both a title and a link
-      if (title && link  ) {
-        // Insert the data in the scrapedData db
-       Article.insert(
-       {
-          title: title,
-          summary: summary,
-          link: link
-        },
-        function(err, inserted) {
+
+// Save an article
+app.post("/articles/save/:id", function(req, res) {
+      // Use the article id to find and update its saved boolean
+      Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
+      // Execute the above query
+      .exec(function(err, doc) {
+        // Log any errors
+        if (err) {
+          console.log(err);
+        }
+        else {
+          // Or send the document to the browser
+          res.send(doc);
+        }
+      });
+});
+
+// Delete an article
+app.post("/articles/delete/:id", function(req, res) {
+      // Use the article id to find and update its saved boolean
+      Article.findOneAndUpdate({ "_id": req.params.id }, {"saved": false, "notes": []})
+      // Execute the above query
+      .exec(function(err, doc) {
+        // Log any errors
+        if (err) {
+          console.log(err);
+        }
+        else {
+          // Or send the document to the browser
+          res.send(doc);
+        }
+      });
+});
+
+
+// Create a new note
+app.post("/notes/save/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  var newNote = new Note({
+    body: req.body.text,
+    article: req.params.id
+  });
+  console.log(req.body)
+  // And save the new note the db
+  newNote.save(function(error, note) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Otherwise
+    else {
+      // Use the article id to find and update it's notes
+      Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "notes": note } })
+      // Execute the above query
+      .exec(function(err) {
+        // Log any errors
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        else {
+          // Or send the note to the browser
+          res.send(note);
+        }
+      });
+    }
+  });
+});
+
+// Delete a note
+app.delete("/notes/delete/:note_id/:article_id", function(req, res) {
+  // Use the note id to find and delete it
+  Note.findOneAndRemove({ "_id": req.params.note_id }, function(err) {
+    // Log any errors
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      Article.findOneAndUpdate({ "_id": req.params.article_id }, {$pull: {"notes": req.params.note_id}})
+       // Execute the above query
+        .exec(function(err) {
+          // Log any errors
           if (err) {
-            // Log the error if one is encountered during the query
             console.log(err);
+            res.send(err);
           }
           else {
-            // Otherwise, log the inserted data
-            console.log(inserted);
+            // Or send the note to the browser
+            res.send("Note Deleted");
           }
         });
-      }
-    });
+    }
   });
-
-  // Send a "Scrape Complete" message to the browser
-  res.send("Scrape Complete");
-
-  });
-
-
-
-// Listen on port 3000
-app.listen(port, function() {
-  console.log("App running on port 3000!");
 });
+
+// Listen on port
+app.listen(port, function() {
+  console.log("App running on port " + port);
+});
+
