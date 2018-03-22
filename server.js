@@ -17,7 +17,7 @@ var cheerio = require("cheerio");
 mongoose.Promise = Promise;
 
 //Define port
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 8080
 
 // Initialize Express
 var app = express();
@@ -41,19 +41,26 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 // Database configuration with mongoose
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect("mongodb://localhost/scraper");
+// // Set mongoose to leverage built in JavaScript ES6 Promises
+// // Connect to the Mongo DB
+// mongoose.Promise = Promise;
+// mongoose.connect(MONGODB_URI);
 
-var databaseURi='mongodb://localhost/scraper';
+//mongoose.connect("mongodb://localhost/scraper");
 
-if(process.env.MONGODB_URL) {
-  mongoose.connect(process.env.MONGOD_URI);
-}
-else
-{
-  mongoose.connect(databaseURi);
-}
-}
+var MONGODB_URI= process.env.MONGODB_URI ||"mongodb://localhost/scraper";
+ mongoose.Promise = Promise;
+ mongoose.connect(MONGODB_URI);
+// if(process.env.MONGODB_URL) {
+//   mongoose.connect(process.env.MONGOD_URI);
+// }
+// else
+// {
+//   mongoose.connect(databaseURi);
+// }
+// }
 var db = mongoose.connection;
 // Show any mongoose errors
 db.on("error", function(error) {
