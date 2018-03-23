@@ -1,35 +1,40 @@
-// Require mongoose
+//import mongoose and Note js files
 var mongoose = require("mongoose");
 var Note = require("./Note");
-// Create Schema class
+// Create Schema for mongoose
 var Schema = mongoose.Schema;
 
-// Create article schema
+//Note schema (design of Article model)
 var ArticleSchema = new Schema({
-  title: {
+  title: 
+  {
     type: String,
     required: true
   },
-  summary: {
+  summary: 
+  {
     type: String,
     required: true
   },
-  link: {
+  link: 
+  {
     type: String,
     required: true
   },
-  saved: {
+  saved: 
+  {
     type: Boolean,
     default: false
   },
-  notes: [{
+  notes: 
+  [{
      type: Schema.Types.ObjectId,
      ref: "Note"
   }]
 });
 
-// Create the Article model with the ArticleSchema
+//create an Article model into mongoose by passing in Article and ArticleSchema
 var Article = mongoose.model("Article", ArticleSchema);
 
-// Export the model
+// Export the Article model
 module.exports = Article;

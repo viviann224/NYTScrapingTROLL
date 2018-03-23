@@ -2,28 +2,17 @@
 /*ghost button*/
 button, #ghost,.ghost
 {
-    /* position centered */
-    background-color: #864666;
-   /*display:inline-block;*/
+   background-color: #864666;
    position: relative;
-    top: 0%;
-    left:10%;
-    
+   top: 0%;
+   left:10%;
+  
     -webkit-transform: translateX(-50%) translateY(-50%);
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    /* text styles */
-    /*font-family: Tahoma, Verdana, Segoe, sans-serif;*/
-    /*font-size: 3em;
-    letter-spacing: 0.1em;*/
 
     color:#ffffff;
-    /* modify text */
-    /*
-    text-decoration:none;*/
     text-transform:lowercase;
-    /*text-rendering:optimizeLegibility;*/
-    /* add a border */
     border:0.15em solid #8c2c5c;
     border-radius: 5px;
     padding:2px;
@@ -32,11 +21,7 @@ button, #ghost,.ghost
     -webkit-transition: color 300ms, background 500ms, border-color 700ms;
     transition: color 300ms, background 500ms, border-color 700ms;
 	opacity: 1;
-  -webkit-transition: opacity 1s linear;
-}
-button, .ghost
-{
-	 /*margin: 20px 0px;*/
+  	-webkit-transition: opacity 1s linear;
 }
 
 button:hover, #ghost:hover, .ghost:hover
@@ -48,7 +33,8 @@ button:hover, #ghost:hover, .ghost:hover
 }
 
 /*cool heading effects!*/
-.masked{
+.masked
+{
 	background: url(/assets/images/title.png) repeat, white;
 	-webkit-text-fill-color: transparent;
 	-webkit-background-clip: text;
@@ -61,7 +47,8 @@ button:hover, #ghost:hover, .ghost:hover
 	z-index:9;
 	
 }
-@-webkit-keyframes masked-animation {
+@-webkit-keyframes masked-animation 
+{
 	0% {background-position: left bottom;}
 	100% {background-position: right bottom;}
 }
@@ -69,112 +56,113 @@ button:hover, #ghost:hover, .ghost:hover
 /*cool hover effects*/
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-body{
+body
+{
   font-family:'Open Sans', sans-serif;
-
   width:100%;
   margin:0 auto;
   padding:0em 0 0em;
-
-    background-color: #252934;
-   
-    color:black;
-
+  background-color: #252934;
+  color:black;
 }
-h1:after{
+
+h1:after
+{
 	color:white;
-  content: ".";
-  text-shadow: 2px 2px 0px #ffffff;
-
+ 	 content: ".";
+  	text-shadow: 2px 2px 0px #ffffff;
 }
-h1{
+
+h1
+{
   font-size:2em;
   color:#fefefe;
-  /*text-transform:lowercase;*/
-  
 }
-
 
 .wrapper
 {
   margin:3em 0;
 }
+
 a,a:visited,a:hover,a:active
 {
-  -webkit-backface-visibility:hidden;
-          backface-visibility:hidden;
+  	-webkit-backface-visibility:hidden;
+ 	backface-visibility:hidden;
 	position:relative;
-  transition:0.5s color ease;
+  	transition:0.5s color ease;
 	text-decoration:none;
 	color:#8c2c5c;
 	font-size:1em;
 }
-a:hover{
+
+a:hover
+{
 	color:#d73444;
 }
-a.before:before,a.after:after{
+
+a.before:before,a.after:after
+{
   content: "";
   transition:0.5s all ease;
   -webkit-backface-visibility:hidden;
-          backface-visibility:hidden;
+  backface-visibility:hidden;
   position:absolute;
 }
-a.before:before{
-  top:-0.25em;
-}
-a.after:after{
-  bottom:-0.25em;
-}
-a.before:before,a.after:after{
+
+a.before:before
+{  top:-0.25em;}
+a.after:after
+{  bottom:-0.25em;}
+
+a.before:before,a.after:after
+{
   height:5px;
   height:0.35rem;
   width:0;
   background:#d73444;
 }
-a.first:after{
-  left:0;
-}
-a.second:after{
-  right:0;
-}
-a.third:after,a.sixth:before,a.sixth:after{
+
+a.first:after
+{  left:0;}
+
+a.second:after
+{  right:0;}
+
+a.third:after,a.sixth:before,a.sixth:after
+{
   left:50%;
   -webkit-transform:translateX(-50%);
-          transform:translateX(-50%);
-}
-a.fourth:before,a.fourth:after{
-  left:0;
-}
-a.fifth:before,a.fifth:after{
-  right:0;
-}
-a.seventh:before{
-  right:0;
-}
-a.seventh:after{
-  left:0;
-}
-a.eigth:before{
-  left:0;
-}
-a.eigth:after{
-  right:0;
-}
-a.before:hover:before,a.after:hover:after{
-  width:100%;
+  transform:translateX(-50%);
 }
 
+a.fourth:before,a.fourth:after
+{  left:0;}
+a.fifth:before,a.fifth:after
+{  right:0;}
 
+a.seventh:before
+{  right:0;}
+
+a.seventh:after
+{  left:0;}
+
+a.eigth:before
+{  left:0;}
+
+a.eigth:after
+{  right:0;}
+
+a.before:hover:before,a.after:hover:after
+{  width:100%;}
 
 .container
 {
 	width:80%;
-	 margin: auto;
+	margin: auto;
 }
 
 .jumbotron
 {
-	/*margin:10px;*/
 	color:#e1236e;
 	background-color: #252934;
 	position: relative;
@@ -184,26 +172,16 @@ a.before:hover:before,a.after:hover:after{
 }
 
 #logo
+{	margin:0px;}
+
+.deleteNote 
+{	display: inline-block;}
+
+.previousNotes 
 {
-	margin:0px;
-
-}
-
-#header
-{
-	
-}
-
-.deleteNote {
-	display: inline-block;
-}
-
-.previousNotes {
     display: inline-block;
     width: 90%
 }
-
-
 
 /* sticky footer Style the header */
 .header 
@@ -217,85 +195,57 @@ a.before:hover:before,a.after:hover:after{
   border-bottom: 2px;
   border-bottom-color: #ffffff;
 }
+
 .panel-default > .panel-heading 
 {
-background: white; 
-color: #1c252f; 
-border-bottom-color: white;
-padding:5px;
-text-transform:uppercase;
-
-
+	background: white; 
+	color: #1c252f; 
+	border-bottom-color: white;
+	padding:5px;
+	text-transform:uppercase;
 }
 
 h4
 {
 	font-family: 'Raleway', sans-serif;
-font-size:20px;
-letter-spacing: -1px;
-line-height: 200%;
-text-align:center;
-
+	font-size:20px;
+	letter-spacing: -1px;
+	line-height: 200%;
+	text-align:center;
 }
+
 #logo
 {
 	font-size:35px;
 	float:left;
 	color:white;
 }
+
 #submenu
 {
 	padding-top:10px;
 	float:right;
 	padding-bottom:5px;
 	font-size: 20px;
-
 }
 #myHeader
 {
 	height:70px;
 	border-bottom: 2px solid #4166c3;
 }
-/*
-button
-{
-	background-color: #3c62c2;
-	border-color: black;
-	border: 2px solid black;
-    border-radius: 5px;
-    color:white;
-    padding:3px;
-    opacity: 1;
-  -webkit-transition: opacity 1s linear !important;
-
-}
-
-
-
-
-
-button: hover
-{
-	background-color:white !important;
-	opacity: .5 !important;
-}
-
-*/
-
 
  .panel-body,.panel 
 {
 	color: #000000; 
 	background-color: white;
-
-	
 }
+
 /* Page content */
-.content {
-	margin-top:40px;
+.content 
+{
+  margin-top:40px;
   padding: 10px;
   width:100%;
-
 }
 
 /* The sticky class is added to the header with JS when it reaches its scroll position */

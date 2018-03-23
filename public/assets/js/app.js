@@ -1,4 +1,5 @@
-//once user scrapes nyt article use ajax to get object data from "/scrape"
+//once user clicks on scrape, go ahead and run
+// "/scrape" and get internet data
 $("#scrape").on("click", function() {
     $.ajax({
         method: "GET",
@@ -9,14 +10,10 @@ $("#scrape").on("click", function() {
     })
 });
 
-//Set clicked nav option to active
-$(".navbar-nav li").click(function() {
-   $(".navbar-nav li").removeClass("active");
-   $(this).addClass("active");
-});
-
-//Handle Save Article button
-$(".save").on("click", function() {
+//once user clicks save go ahead and associate the article 
+//to id and pass it to save fx call
+$(".save").on("click", function() 
+{
     var thisId = $(this).attr("data-id");
     $.ajax({
         method: "POST",
@@ -26,7 +23,8 @@ $(".save").on("click", function() {
     })
 });
 
-//Handle Delete Article button
+//once user clicks delete go ahead and associate the 
+//id and pass to delete fx call
 $(".delete").on("click", function() {
     var thisId = $(this).attr("data-id");
     $.ajax({
@@ -37,11 +35,12 @@ $(".delete").on("click", function() {
     })
 });
 
-//Handle Save Note button
+//once user clicks on save note go ahead and verified field not empty 
+//and pass id and note to save note fx
 $(".saveNote").on("click", function() {
     var thisId = $(this).attr("data-id");
     if (!$("#noteText" + thisId).val()) {
-        alert("please enter a note to save")
+        alert("please enter a note")
     }else {
       $.ajax({
             method: "POST",
@@ -51,8 +50,8 @@ $(".saveNote").on("click", function() {
             }
           }).done(function(data) {
               // Log the response
-              console.log(data);
-              // Empty the notes section
+              //console.log(data);
+              //clear out the notes section
               $("#noteText" + thisId).val("");
               $(".modalNote").modal("hide");
               window.location = "/saved"
@@ -60,7 +59,8 @@ $(".saveNote").on("click", function() {
     }
 });
 
-//Handle Delete Note button
+//once the user clicks on delete go ahead and grab the current id and note associated with
+//and pass into delete note fx
 $(".deleteNote").on("click", function() {
     var noteId = $(this).attr("data-note-id");
     var articleId = $(this).attr("data-article-id");
@@ -75,7 +75,6 @@ $(".deleteNote").on("click", function() {
 });
 
 //sticky header
-
 window.onscroll = function() {myFunction()};
 
 var header = document.getElementById("myHeader");
@@ -88,4 +87,3 @@ function myFunction() {
     header.classList.remove("sticky");
   }
 }
-
