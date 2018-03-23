@@ -1,3 +1,52 @@
+
+/*ghost button*/
+button, #ghost,.ghost
+{
+    /* position centered */
+    background-color: #ffffff;
+   /*display:inline-block;*/
+   position: relative;
+    top: 0%;
+    left:10%;
+    
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    /* text styles */
+    /*font-family: Tahoma, Verdana, Segoe, sans-serif;*/
+    /*font-size: 3em;
+    letter-spacing: 0.1em;*/
+
+    color:#8c2c5c;
+    /* modify text */
+    /*
+    text-decoration:none;*/
+    text-transform:lowercase;
+    /*text-rendering:optimizeLegibility;*/
+    /* add a border */
+    border:0.15em solid #8c2c5c;
+    border-radius: 5px;
+    padding:2px;
+
+    /* animate the change */
+    -webkit-transition: color 300ms, background 500ms, border-color 700ms;
+    transition: color 300ms, background 500ms, border-color 700ms;
+	opacity: 1;
+  -webkit-transition: opacity 1s linear;
+}
+button, .ghost
+{
+	 /*margin: 20px 0px;*/
+}
+
+button:hover, #ghost:hover, .ghost:hover
+{
+    background:#8c2c5c;
+    border-color:#8c2c5c;
+    color:#ffffff;
+    opacity: .7;
+}
+
 /*cool heading effects!*/
 .masked{
 	background: url(/assets/images/title.png) repeat, white;
@@ -154,9 +203,7 @@ a.before:hover:before,a.after:hover:after{
     width: 90%
 }
 
-#scrape {
-    margin: 8px 0px;
-}
+
 
 /* sticky footer Style the header */
 .header 
@@ -198,7 +245,10 @@ text-align:center;
 }
 #submenu
 {
+	padding-top:10px;
 	float:right;
+	padding-bottom:5px;
+	font-size: 20px;
 
 }
 #myHeader
@@ -206,7 +256,7 @@ text-align:center;
 	height:70px;
 	border-bottom: 2px solid #4166c3;
 }
-
+/*
 button
 {
 	background-color: #3c62c2;
@@ -230,7 +280,7 @@ button: hover
 	opacity: .5 !important;
 }
 
-
+*/
 
 
  .panel-body,.panel 
