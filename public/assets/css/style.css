@@ -1,3 +1,22 @@
+/*cool heading effects!*/
+.masked{
+	background: url(/assets/images/title.png) repeat, white;
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-webkit-animation-name: masked-animation;
+	-webkit-animation-duration: 40s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	letter-spacing: -1px;
+	font-family: 'Raleway', sans-serif;
+	z-index:9;
+	
+}
+@-webkit-keyframes masked-animation {
+	0% {background-position: left bottom;}
+	100% {background-position: right bottom;}
+}
+
 /*cool hover effects*/
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -16,13 +35,14 @@ body{
 h1:after{
 	color:white;
   content: ".";
+  text-shadow: 2px 2px 0px #ffffff;
 
 }
 h1{
   font-size:2em;
   color:#fefefe;
   /*text-transform:lowercase;*/
-  text-shadow: 2px 2px 0px #484849;
+  
 }
 
 
@@ -99,6 +119,7 @@ a.before:hover:before,a.after:hover:after{
 
 .container
 {
+	width:80%;
 	 margin: auto;
 }
 
@@ -154,11 +175,19 @@ a.before:hover:before,a.after:hover:after{
 background: white; 
 color: #1c252f; 
 border-bottom-color: white;
-font-family: 'Raleway', sans-serif;
-font-size:30px;
+padding:5px;
 text-transform:uppercase;
+
+
+}
+
+h4
+{
+	font-family: 'Raleway', sans-serif;
+font-size:20px;
 letter-spacing: -1px;
-line-height: 1.6;
+line-height: 200%;
+text-align:center;
 
 }
 #logo
@@ -185,20 +214,23 @@ button
 	border: 2px solid black;
     border-radius: 5px;
     color:white;
+    padding:3px;
+    opacity: 1;
+  -webkit-transition: opacity 1s linear;
 }
+
+
+
+
 
 button: hover
 {
 	background-color:white !important;
+	opacity: .5;
 }
 
-button:active 
-{
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-</
+
+
 
  .panel-body,.panel 
 {
