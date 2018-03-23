@@ -57,7 +57,7 @@ a,a:visited,a:hover,a:active
 	position:relative;
   transition:0.5s color ease;
 	text-decoration:none;
-	color:#949494;
+	color:#8c2c5c;
 	font-size:1em;
 }
 a:hover{
@@ -216,7 +216,8 @@ button
     color:white;
     padding:3px;
     opacity: 1;
-  -webkit-transition: opacity 1s linear;
+  -webkit-transition: opacity 1s linear !important;
+
 }
 
 
@@ -226,7 +227,7 @@ button
 button: hover
 {
 	background-color:white !important;
-	opacity: .5;
+	opacity: .5 !important;
 }
 
 
