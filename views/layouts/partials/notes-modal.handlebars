@@ -8,6 +8,7 @@
                 <h4 class="modal-title">Notes for {{this.title}}</h4>
             </div>
             <div class="modal-body">
+                <!--if there are notes go ahead and display all of em per article-->
                 {{#if this.notes}}
                     {{#each this.notes}}
                         <div class="panel panel-default">
@@ -18,6 +19,7 @@
                         </div>
                     {{/each}}
                 {{else}}
+                <!--if no notes-->
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4>No notes for this article yet.</h4>

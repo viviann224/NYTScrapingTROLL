@@ -1,5 +1,4 @@
-<!--Saved Articles Page-->
-
+<!--Saved articles and notes-->
 <div class="container">
 
     <div class="col-md-12 jumbotron">
@@ -7,6 +6,7 @@
             <h1 class="masked"> Saved Articles</h1>
         </div>
     </div>
+    <!--handlebars to display all saved notes -->
     <div class="col-md-12">
         {{#if article}}
             {{#each article}}
@@ -24,6 +24,7 @@
                 </div>
             {{/each}}
         {{else}}
+        <!--displays if no saved posts-->
         <div class="panel panel-default">
             <div class="panel-body">
                 <h4>You have no saved articles.</h4>
@@ -33,7 +34,7 @@
     </div>
 </div>
 
-<!--Clicked Notes Modal-->
+<!--displays all the notes on the modal-->
 {{#each article}}
     {{> notes-modal }}
 {{/each}}

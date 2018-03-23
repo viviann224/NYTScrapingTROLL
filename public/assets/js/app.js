@@ -1,4 +1,4 @@
-//Handle Scrape button
+//once user scrapes nyt article use ajax to get object data from "/scrape"
 $("#scrape").on("click", function() {
     $.ajax({
         method: "GET",

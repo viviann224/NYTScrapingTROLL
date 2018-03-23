@@ -1,11 +1,13 @@
-<!--Homepage-->
+<!--mainpage-->
 <div class="container">
     <div class="col-md-12 jumbotron">
         <div class="text-center">
-            <h1 class="masked">Scraping TROLL</h1>
+            <!--cool animated logo -->
+            <h1 class="masked">NYT Scraping TROLL</h1>
         </div>
 
     </div>
+    <!--after scraping display articles-->
     <div class="col-md-12">
         {{#if article}}
             {{#each article}}
@@ -22,6 +24,7 @@
             </div>
             {{/each}}
         {{else}}
+        <!--if not scraped go ahead and tell user no articles-->
         <div class="panel panel-default">
             <div class="panel-body">
             <h4>Uh Oh. Looks like we don't have any new articles.</h4>
